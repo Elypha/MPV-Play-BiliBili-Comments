@@ -8,13 +8,15 @@
 
 ### 本地视频弹幕
 
-您可以播放本地视频文件而不是网址。要将本地视频文件与其对应的 bilibili 弹幕链接，请按照以下���南操作。
+您可以播放本地视频文件而不是网址。要将本地视频文件与其对应的 bilibili 弹幕链接，请按照以下指南操作。
 
 **a. 获取视频的 bilibili cid**
 
 有效的 cid 是类似 `304158157` 的数字。您可以使用自己喜欢的方法获取，或者使用这个为此目的制作的[脚本](https://github.com/Elypha/mpv-danmaku/blob/main/release.user.js)（点击安装：[点击](https://raw.githubusercontent.com/Elypha/mpv-danmaku/refs/heads/main/release.user.js)）。
 
-该脚本会在工具栏的用户信息右侧添加一个按钮，点击它，您可以将页面上可用视频的 cid 列表及其标题复制到剪贴板。以下是一个示例。
+![2024-11-01_12-18-48_634](https://github.com/user-attachments/assets/469d845e-a071-4d6d-ae51-c57034481481)
+
+该脚本会在播放列表添加一个按钮，点击它，您可以将页面上可用视频的 cid 列表及其标题复制到剪贴板。以下是一个示例。
 
 ```
 83206504    : 《刀剑神域》第1话 剑的世界
