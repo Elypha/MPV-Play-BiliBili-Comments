@@ -51,7 +51,7 @@ The file should be placed at the **same** level with those video files.
 When a video is played, the script will look for a match by file name. A match is valid if the `file_name` part in your `danmaku.txt` contains the name (without ext) of the file you are playing. For example, this line below works for all the following files.
 
 ```
-`Sword Art Online [01].eng.mkv,83206504`
+Sword Art Online [01].eng.mkv,83206504
 ```
 
 - `Sword Art Online [01].mkv`
