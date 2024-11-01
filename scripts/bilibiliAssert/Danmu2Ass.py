@@ -433,7 +433,7 @@ def export(func):
 
 def getComments(cid,font_size = 25):
     response = request.urlopen(request.Request(
-        url = ''.join(['https://comment.bilibili.com/',cid[0],'.xml']),
+        url = ''.join(['https://comment.bilibili.com/',cid[0].strip(),'.xml']),
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Edg/124.0.0.0'
         }
