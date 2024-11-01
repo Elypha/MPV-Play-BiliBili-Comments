@@ -2,6 +2,9 @@
 
 Enable danmaku for local video files with mpv player.
 
+![2024-11-01_12-23-46_005](https://github.com/user-attachments/assets/f49b5b1f-a086-4426-9b1e-935653452a7f)
+
+
 # Highlights
 
 In this fork:
