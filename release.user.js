@@ -37,26 +37,19 @@
     }
 
     function main() {
-        // make a copy
-        let copy = $("div[data-name='feeds']")[0].cloneNode(false);
-        copy.setAttribute("data-name", "copy");
+        let copy = document.createElement("button");
+        copy.textContent = "Copy Cid";
+        copy.style.marginRight = "0.5em";
 
-        // add a span child
-        let span = document.createElement("span");
-        span.innerText = "Copy cid";
-        copy.appendChild(span);
-
-        // create listener for click event
         copy.addEventListener("click", () => {
             doAction();
         });
 
-        // add copy after the upload element
-        $("div[data-name='upload']").after(copy);
+        $("div[class^='eplist_right_wrap_']")[0].firstChild.before(copy);
     }
 
     const observer = new MutationObserver(() => {
-        const element = $("div[data-name='feeds']");
+        const element = $("div[class^='eplist_right_wrap_']");
         if (element.length > 0) {
             // Stop observing
             observer.disconnect();
