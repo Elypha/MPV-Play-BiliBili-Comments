@@ -6,26 +6,27 @@ local options = require "mp.options"
 
 local o = {
     -- 弹幕字体
-    fontname = "sans-serif",
+    fontname = "Source Han Sans",
     -- 弹幕字体大小
-    fontsize = "50",
+    fontsize = "35",
     -- 弹幕不透明度(0-1)
-    opacity = "0.95",
+    opacity = "0.80",
     -- 滚动弹幕显示的持续时间 (秒)
     duration_marquee = "10",
     -- 静止弹幕显示的持续时间 (秒)
     duration_still = "5",
     -- 保留底部多少高度的空白区域 (取值0.0-1.0)
-    percent = "0.75",
+    percent = "0.35",
     -- 弹幕屏蔽的关键词文件路径，支持绝对和相对路径
     filter_file = "",
     -- python可执行文件路径，默认为环境变量的python，若无法运行请指定 python[.exe] 的路径
-    python_path = "python",
+    python_path = "E:/dev/py3/.venv/Scripts/python.exe",
 }
 
 options.read_options(
     o, _, function()
     end
+
 
 )
 
@@ -82,7 +83,7 @@ local function load_danmu(danmu_file)
     if not file_exists(danmu_file) then
         return
     end
-    log("开火")
+    log("全舰弹幕装填完毕！")
     danmu_open = true
     -- 如果可用将弹幕挂载为次字幕
     if sec_sub_ass_override then
@@ -103,22 +104,44 @@ end
 -- download function
 local function assprocess()
     local path = mp.get_property("path")
-    if path and not path:find("^%a[%w.+-]-://") and not (path:find("bilibili.com") or path:find("bilivideo.com")) then
-        return
-    end
+
+    -- if path and not path:find("^%a[%w.+-]-://") and not (path:find("bilibili.com") or path:find("bilivideo.com")) then
+    -- 	log('1')
+    --     return
+    -- end
     -- check if filepahth to python exist
     if not o.python_path == "python" and not file_exists(o.python_path) then
         log("未找到 Python 可执行文件: " .. o.python_path)
         return
     end
+
     -- get video cid
-    local cid = mp.get_opt("cid")
-    if cid == nil and path and path:find("^%a[%w.+-]-://") then
-        cid, danmaku_id = get_cid()
-        if danmaku_id ~= nil then
-            mp.commandv("sub-remove", danmaku_id)
-        end
+    local cid = nil
+    local result = mp.command_native(
+                       {
+            name = "subprocess",
+            playback_only = false,
+            capture_stdout = true,
+            args = {
+                o.python_path,
+                utils.join_path(mp.get_script_directory(), "get_cid.py"),
+                "--file",
+                path,
+            },
+        }
+                   )
+    print("result: " .. result.stdout)
+    if result.error == nil then
+        cid = result.stdout
     end
+
+    -- local cid = mp.get_opt("cid")
+    -- if cid == nil and path and path:find("^%a[%w.+-]-://") then
+    --     cid, danmaku_id = get_cid()
+    --     if danmaku_id ~= nil then
+    --         mp.commandv("sub-remove", danmaku_id)
+    --     end
+    -- end
     if cid == nil then
         return
     end
@@ -142,6 +165,7 @@ local function assprocess()
     elseif aspect < dw / dh then
         dw = math.floor(dh * aspect)
     end
+
     -- choose to use python or .exe
     local arg = {
         o.python_path,
@@ -184,7 +208,7 @@ local function assprocess()
     -- '-r',
     -- cid,
     -- }
-    log("弹幕正在上膛")
+    -- log("弹幕正在上膛")
     -- run python to get comments
     mp.command_native_async(
         {
