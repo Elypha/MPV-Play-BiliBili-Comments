@@ -14,7 +14,9 @@ You play local video files instead of urls. To link a local video file with its 
 
 A valid cid is a number like `304158157`. You may implement your favourite ways to get this, or use this [script](https://github.com/Elypha/mpv-danmaku/blob/main/release.user.js) (click to install: [click](https://raw.githubusercontent.com/Elypha/mpv-danmaku/refs/heads/main/release.user.js)) made for this specific purpose.
 
-The script adds a button to the right of your user info on the toolbar and by clicking it, you copy a list of cids of videos available on the page, together with their titles, to your clipboard. Here's an example.
+![2024-11-01_12-18-48_634](https://github.com/user-attachments/assets/469d845e-a071-4d6d-ae51-c57034481481)
+
+The script adds a button to the playlist and by clicking it, you copy a list of cids of videos available on the page, together with their titles, to your clipboard. Here's an example.
 
 ```
 83206504    : 《刀剑神域》第1话 剑的世界
@@ -27,7 +29,7 @@ The script adds a button to the right of your user info on the toolbar and by cl
 
 **b. Make `danmaku.txt`**
 
-`danmaku.txt` is a file to store which cid should be used for your local videos. Each line is an entry and the format is:
+`danmaku.txt` is a file to store which cid should be used for each of your local videos. Each line is an entry and the format is:
 
 ```
 <file_name>,<cid>
